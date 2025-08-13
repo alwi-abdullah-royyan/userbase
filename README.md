@@ -56,7 +56,14 @@ http://localhost:3000/api/users
 ```
 
 ---
+## 🚀 Demo
 
+### Frontend
+- **Live Website**: [Vercel](https://userbase-blond.vercel.app/)
+
+### Backend / API
+- **API Docs (Postman)**: [View Documentation](https://alwi-abdullah-royyan-3851140.postman.co/workspace/Personal-Workspace~f65cbbf1-a46f-4413-bf89-3d9ff33b087c/collection/47549257-58eeda05-b7d5-4692-beae-65c50854dbb5?action=share&creator=47549257)
+---
 ### 1️⃣ Create User
 
 **Endpoint:**
