@@ -1,40 +1,193 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Next.js + Supabase CRUD API
 
-## Getting Started
+Proyek ini adalah implementasi CRUD sederhana menggunakan **Next.js** (Pages Router) dan **Supabase** sebagai database.  
+Fitur yang tersedia:
 
-First, run the development server:
+- Membuat pengguna (Create)
+- Mengambil daftar semua pengguna (Read)
+- Memperbarui data pengguna berdasarkan ID (Update)
+- Menghapus pengguna berdasarkan ID (Delete)
+- Validasi email & nomor telepon pada input
+
+---
+
+## 🚀 Cara Menjalankan Aplikasi
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/username/nama-repo.git
+cd nama-repo
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Konfigurasi Environment Variables
+
+Buat file `.env.local` di root project:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+> **Catatan:** URL dan Key bisa dilihat di dashboard Supabase → Project Settings → API.
+
+### 4. Jalankan Aplikasi (Development Mode)
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aplikasi akan berjalan di [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 📚 Dokumentasi API
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### Base URL (Development)
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+http://localhost:3000/api/users
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### 1️⃣ Create User
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+**Endpoint:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+POST /api/users
+```
 
-## Deploy on Vercel
+**Body (JSON):**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```json
+{
+  "nama": "Budi Santoso",
+  "email": "budi.santoso@example.com",
+  "nomor_telepon": "081234567890",
+  "status_aktif": true,
+  "departement": "IT"
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+**Validasi:**
+
+- Email harus format valid
+- Nomor telepon hanya angka, minimal 10 digit
+
+**Response:**
+
+```json
+[
+  {
+    "id": "uuid",
+    "nama": "Budi Santoso",
+    "email": "budi.santoso@example.com",
+    "nomor_telepon": "081234567890",
+    "status_aktif": true,
+    "departement": "IT",
+    "created_at": "2025-08-13T07:00:00.000Z"
+  }
+]
+```
+
+---
+
+### 2️⃣ Get All Users
+
+**Endpoint:**
+
+```
+GET /api/users
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": "uuid",
+    "nama": "Siti Rahma",
+    "email": "siti.rahma@example.com",
+    "nomor_telepon": "081298765432",
+    "status_aktif": true,
+    "departement": "HRD",
+    "created_at": "2025-08-13T07:00:00.000Z"
+  }
+]
+```
+
+---
+
+### 3️⃣ Update User
+
+**Endpoint:**
+
+```
+PUT /api/users/{id}
+```
+
+**Body (JSON):**
+
+```json
+{
+  "status_aktif": false,
+  "departement": "Finance"
+}
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": "uuid",
+    "nama": "Siti Rahma",
+    "email": "siti.rahma@example.com",
+    "nomor_telepon": "081298765432",
+    "status_aktif": false,
+    "departement": "Finance",
+    "created_at": "2025-08-13T07:00:00.000Z"
+  }
+]
+```
+
+---
+
+### 4️⃣ Delete User
+
+**Endpoint:**
+
+```
+DELETE /api/users/{id}
+```
+
+**Response:**
+
+```json
+{
+  "message": "User deleted successfully"
+}
+```
+
+---
+
+## 🛠 Teknologi yang Digunakan
+
+- [Next.js](https://nextjs.org/)
+- [Supabase](https://supabase.com/)
+- JavaScript (Pages Router)
+- REST API
+
+---
+
+## 📄 Lisensi
+
+MIT License
